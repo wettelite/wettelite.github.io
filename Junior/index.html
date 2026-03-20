@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Junior × Wett Elite</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070A10;--surface:#0C1220;--card:#101828;--border:#1A2840;
+  --turbo:#FF3D00;--turbo2:#FF6B35;--gold:#FFB800;
+  --teal:#00E5CC;--green:#00E676;--white:#F0F4FF;--muted:#6B7E99;--dim:#3A4A60;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;line-height:1.6}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,10,16,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:'Rajdhani';font-weight:700;font-size:20px;letter-spacing:2px}
+.nav-logo span{color:var(--turbo)}
+.nav-links{display:flex;gap:20px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:1px;font-family:'Rajdhani';font-weight:600;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--turbo)}
+.nav-cta{
+  background:var(--turbo);color:#fff;
+  font-family:'Rajdhani';font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;
+  padding:8px 20px;border-radius:6px;text-decoration:none;
+  transition:opacity .2s;white-space:nowrap;
+}
+.nav-cta:hover{opacity:.85}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--white);border-radius:2px;display:block}
+
+/* ── SECTIONS ── */
+section{padding:80px 24px;max-width:1100px;margin:0 auto}
+.section-tag{
+  display:inline-block;background:rgba(255,61,0,.12);border:1px solid rgba(255,61,0,.3);
+  color:var(--turbo);font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  font-family:'Rajdhani';font-weight:700;padding:4px 12px;border-radius:4px;margin-bottom:12px;
+}
+.section-title{
+  font-family:'Rajdhani';font-weight:700;
+  font-size:clamp(28px,5vw,48px);line-height:1.05;margin-bottom:8px;
+}
+.section-title em{color:var(--turbo);font-style:normal}
+.section-sub{font-size:15px;color:var(--muted);max-width:600px;margin-bottom:40px}
+
+/* ── HERO ── */
+#hero{
+  padding:100px 24px 80px;max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+}
+.hero-tag{
+  font-family:'Rajdhani';font-weight:700;font-size:13px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--turbo);margin-bottom:12px;
+}
+.hero-name{
+  font-family:'Rajdhani';font-weight:700;
+  font-size:clamp(52px,8vw,88px);line-height:.9;
+  background:linear-gradient(135deg,#fff 30%,var(--turbo2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:20px;
+}
+.hero-text{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:32px}
+.hero-text strong{color:var(--white)}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--turbo),var(--turbo2));
+  color:#fff;font-family:'Rajdhani';font-weight:700;font-size:16px;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 36px;border-radius:8px;text-decoration:none;
+  box-shadow:0 4px 24px rgba(255,61,0,.3);transition:transform .2s,box-shadow .2s;
+}
+.hero-btn:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(255,61,0,.45)}
+.hero-stats{display:flex;flex-direction:column;gap:14px}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);border-left:3px solid var(--turbo);
+  border-radius:10px;padding:18px 22px;
+}
+.stat-card.teal{border-left-color:var(--teal)}
+.stat-card.green{border-left-color:var(--green)}
+.stat-val{font-family:'Rajdhani';font-weight:700;font-size:clamp(28px,4vw,40px);color:var(--turbo);line-height:1}
+.stat-card.teal .stat-val{color:var(--teal)}
+.stat-card.green .stat-val{color:var(--green)}
+.stat-lbl{font-size:13px;color:var(--muted);margin-top:3px}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0 24px}
+
+/* ── CARDS GRID ── */
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cards-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.card-bar{height:3px}
+.card-in{padding:22px}
+.card-h{font-family:'Rajdhani';font-weight:700;font-size:17px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.card-p{font-size:13px;color:var(--muted);line-height:1.6}
+.card-p strong{color:var(--white)}
+
+/* ── STEPS ── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-align:center;padding:0 16px 24px}
+.step-bar{height:3px;width:100%;margin-bottom:20px}
+.step-num{
+  width:50px;height:50px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Rajdhani';font-weight:700;font-size:24px;color:var(--bg);
+  margin:0 auto 14px;
+}
+.step-title{font-family:'Rajdhani';font-weight:700;font-size:15px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.55}
+.step-desc strong{color:var(--white)}
+
+/* ── CHECK LISTS ── */
+.check-row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
+.check-row:last-child{border-bottom:none}
+.ck{font-size:15px;flex-shrink:0;margin-top:1px}
+.ct{font-size:14px;color:var(--white);line-height:1.4}
+
+/* ── BIG NUM ── */
+.big-num{font-family:'Rajdhani';font-weight:700;font-size:clamp(36px,5vw,56px);line-height:1}
+
+/* ── EARN HERO ── */
+.earn-hero{
+  background:var(--card);border:2px solid var(--turbo);border-radius:16px;
+  padding:32px 40px;text-align:center;margin-bottom:24px;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(255,61,0,.07),var(--card));
+}
+.earn-mega{
+  font-family:'Rajdhani';font-weight:700;font-size:clamp(64px,10vw,96px);line-height:1;
+  background:linear-gradient(135deg,var(--gold),var(--turbo2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ── GREEN ALERT ── */
+.alert-green{
+  background:#031A0A;border:1px solid rgba(0,230,118,.3);border-radius:10px;
+  padding:14px 20px;display:flex;align-items:flex-start;gap:12px;
+  font-size:14px;color:var(--green);font-weight:600;margin-top:20px;
+}
+.bonus-bar{
+  background:#1A1000;border:1px solid rgba(255,184,0,.25);border-radius:10px;
+  padding:16px 20px;font-size:14px;color:var(--gold);line-height:1.6;margin-top:20px;
+}
+
+/* ── FLOW ── */
+.flow{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;margin-bottom:24px}
+.flow-box{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.flow-box .in{padding:22px}
+.flow-item{font-size:13px;color:var(--muted);padding:10px 0;border-bottom:1px solid var(--border);line-height:1.4}
+.flow-item:last-child{border-bottom:none}
+.flow-item b{color:var(--white)}
+.flow-arrow{display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--turbo);padding:0 16px;opacity:.7}
+.flow-note{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px}
+
+/* ── BENEFITS ── */
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ben{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:border-color .2s}
+.ben:hover{border-color:var(--turbo)}
+.bi{font-size:26px;margin-bottom:8px}
+.bt{font-family:'Rajdhani';font-weight:700;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--turbo);margin-bottom:6px}
+.bd{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── CTA SECTION ── */
+#cta-section{
+  text-align:center;padding:100px 24px;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(255,61,0,.08),transparent);
+}
+#cta-section .inner{max-width:700px;margin:0 auto}
+.personal-badge{
+  display:inline-block;background:rgba(255,61,0,.12);border:1px solid rgba(255,61,0,.35);
+  color:var(--turbo);font-family:'Rajdhani';font-weight:700;font-size:12px;letter-spacing:3px;
+  text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:16px;
+}
+.cta-title{font-family:'Rajdhani';font-weight:700;font-size:clamp(40px,7vw,72px);line-height:1;margin-bottom:10px}
+.cta-title em{color:var(--turbo);font-style:normal}
+.cta-sub{font-size:16px;color:var(--muted);font-style:italic;margin-bottom:36px}
+.cta-big-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,var(--turbo),var(--turbo2));
+  color:#fff;font-family:'Rajdhani';font-weight:700;font-size:20px;letter-spacing:2px;text-transform:uppercase;
+  padding:18px 52px;border-radius:10px;text-decoration:none;
+  box-shadow:0 4px 40px rgba(255,61,0,.35);transition:transform .2s,box-shadow .2s;
+  margin-bottom:36px;display:inline-flex;
+}
+.cta-big-btn:hover{transform:translateY(-3px);box-shadow:0 10px 60px rgba(255,61,0,.5)}
+.cta-checks{display:flex;flex-direction:column;gap:8px;margin-bottom:40px;text-align:left;display:inline-flex}
+.cta-check{font-size:14px;color:var(--muted)}
+.cta-check b{color:var(--green);margin-right:8px}
+.cta-footer{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;font-family:'Rajdhani'}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-size:12px;color:var(--dim);font-family:'Rajdhani';letter-spacing:1px}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .nav-links{display:none;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(7,10,16,.98);border-bottom:1px solid var(--border);padding:20px 24px;gap:16px}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  #hero{grid-template-columns:1fr;gap:40px;padding:60px 24px 60px}
+  .hero-name{font-size:clamp(48px,12vw,72px)}
+  .cards-3{grid-template-columns:1fr}
+  .cards-2{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;gap:12px}
+  .flow{grid-template-columns:1fr;grid-template-rows:auto auto auto}
+  .flow-arrow{transform:rotate(90deg);padding:8px 0}
+  .ben-grid{grid-template-columns:1fr 1fr}
+  section{padding:60px 20px}
+  .earn-hero{padding:24px 20px}
+  .cta-checks{display:flex}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .ben-grid{grid-template-columns:1fr}
+  .hero-name{font-size:clamp(44px,14vw,64px)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🔥 <span>JUN</span>IOR</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#wie">Modell</a></li>
+    <li><a href="#rolle">Deine Rolle</a></li>
+    <li><a href="#verdienst">Verdienst</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#cta-section">Call</a></li>
+  </ul>
+  <a href="https://t.me/jouley" target="_blank" class="nav-cta">✈️ Telegram</a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div>
+    <div class="hero-tag">🔥 Exklusiv für Junior</div>
+    <div class="hero-name">JUNIOR</div>
+    <p class="hero-text">
+      <strong>Hey,</strong> wir haben eine Partnerschaft aufgebaut, die speziell für Creator mit deiner Reichweite funktioniert.<br><br>
+      Kein Risiko. Kein Stress. Einfach verdienen.
+    </p>
+    <a href="https://t.me/jouley" target="_blank" class="hero-btn">✈️ &nbsp; Jetzt auf Telegram schreiben</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-val">150 €</div>
+      <div class="stat-lbl">Pro Registrierung – direkt für dich</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-val">37.500 €</div>
+      <div class="stat-lbl">Referenz-Creator – 3 Wochen, März</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-val">~15.000 €</div>
+      <div class="stat-lbl">Prognose für dich – allein im März</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WER SIND WIR -->
+<section id="wer">
+  <div class="section-tag">Das Unternehmen</div>
+  <h2 class="section-title">Wer steckt dahinter? <em>Wett Elite</em></h2>
+  <p class="section-sub">Spezialisiert auf Affiliate-Marketing im Sport- &amp; Wettbereich.</p>
+  <div class="cards-3">
+    <div class="card">
+      <div class="card-bar" style="background:var(--turbo)"></div>
+      <div class="card-in">
+        <div class="card-h" style="color:var(--turbo)">Wett Elite</div>
+        <p class="card-p">Spezialisiert auf Affiliate-Marketing im Sport- &amp; Wettbereich. Mehrere etablierte Affiliates im Netzwerk.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:var(--teal)"></div>
+      <div class="card-in">
+        <div class="card-h" style="color:var(--teal)">Unser Ziel</div>
+        <p class="card-p">Aufbau einer starken Discord-Community für Sportprognosen. <strong>80% deiner Zuschauer</strong> schauen Prognosen auf TikTok – und sind aktive Wettbegeisterte.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:var(--gold)"></div>
+      <div class="card-in">
+        <div class="card-h" style="color:var(--gold)">Warum Junior?</div>
+        <p class="card-p">Wir gehen davon aus, dass du im März <strong>locker 100 Leute</strong> bringen könntest. Im April sehen wir das Doppelte – basierend auf deiner Reichweite.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WIE FUNKTIONIERT ES -->
+<section id="wie">
+  <div class="section-tag">Das Modell</div>
+  <h2 class="section-title">So funktioniert es – <em>in 4 Schritten</em></h2>
+  <p class="section-sub">Einfach, transparent und ohne Risiko für dich.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-bar" style="background:var(--turbo)"></div>
+      <div class="step-num" style="background:var(--turbo)">1</div>
+      <div class="step-title" style="color:var(--turbo)">TikTok</div>
+      <p class="step-desc">Du postest weiter wie gewohnt. Keine Änderung an deinem Content.</p>
+    </div>
+    <div class="step">
+      <div class="step-bar" style="background:var(--gold)"></div>
+      <div class="step-num" style="background:var(--gold)">2</div>
+      <div class="step-title" style="color:var(--gold)">Discord Teaser</div>
+      <p class="step-desc">Deinen <strong>besten Tipp</strong> gibst du exklusiv im Discord. Das schafft Anreiz.</p>
+    </div>
+    <div class="step">
+      <div class="step-bar" style="background:var(--teal)"></div>
+      <div class="step-num" style="background:var(--teal)">3</div>
+      <div class="step-title" style="color:var(--teal)">Community Join</div>
+      <p class="step-desc">Fans treten bei. Vollzugang nach <strong>50 € Einzahlung</strong> beim Partner-Bookie.</p>
+    </div>
+    <div class="step">
+      <div class="step-bar" style="background:var(--green)"></div>
+      <div class="step-num" style="background:var(--green)">4</div>
+      <div class="step-title" style="color:var(--green)">Junior verdient</div>
+      <p class="step-desc">Du bekommst <strong style="color:var(--gold)">150 €</strong> pro erfolgreich registriertem Nutzer.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DEINE ROLLE -->
+<section id="rolle">
+  <div class="section-tag">Deine Rolle</div>
+  <h2 class="section-title">Konkret &amp; <em>ehrlich</em></h2>
+  <p class="section-sub">Was du tust – und was wir übernehmen.</p>
+  <div class="cards-2">
+    <div class="card">
+      <div class="card-bar" style="background:var(--teal)"></div>
+      <div class="card-in">
+        <div class="card-h" style="color:var(--teal)">Was Junior tut</div>
+        <div class="check-row"><span class="ck">✓</span><span class="ct">TikTok-Prognosen wie bisher posten</span></div>
+        <div class="check-row"><span class="ck">✓</span><span class="ct">Besten Tipp exklusiv im Discord teilen</span></div>
+        <div class="check-row"><span class="ck">✓</span><span class="ct">Community unter eigenem Namen aufbauen</span></div>
+        <div class="check-row"><span class="ck">✓</span><span class="ct">Optional: erstmal mit Telegram starten &amp; testen</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:var(--turbo)"></div>
+      <div class="card-in">
+        <div class="card-h" style="color:var(--turbo)">Was wir übernehmen</div>
+        <div class="check-row"><span class="ck" style="color:var(--turbo)">✓</span><span class="ct">Vollständiger technischer Support</span></div>
+        <div class="check-row"><span class="ck" style="color:var(--turbo)">✓</span><span class="ct">Kein direktes Chatten mit Usern nötig</span></div>
+        <div class="check-row"><span class="ck" style="color:var(--turbo)">✓</span><span class="ct">Auszahlung: Bar / Überweisung / Krypto</span></div>
+        <div class="check-row"><span class="ck" style="color:var(--turbo)">✓</span><span class="ct">Promotions, Design &amp; Strategie-Support</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="alert-green">
+    <span>✅</span>
+    <span>Du bewirbst <strong>nur deinen Discord</strong> – keinen Buchmacher direkt. Keine rechtliche Grauzone für Junior.</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VERDIENST -->
+<section id="verdienst">
+  <div class="section-tag">Verdienstpotenzial</div>
+  <h2 class="section-title"><em>Junior</em> – Deine Zahlen</h2>
+  <p class="section-sub">Basierend auf deiner Reichweite und unseren bisherigen Case Studies.</p>
+  <div class="earn-hero">
+    <div style="font-size:12px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;font-family:'Rajdhani';margin-bottom:6px">Pro Registrierung</div>
+    <div class="earn-mega">150 €</div>
+    <div style="font-size:14px;color:var(--muted);margin-top:8px">Direkt für Junior – pro erfolgreich registriertem Nutzer</div>
+  </div>
+  <div class="cards-3">
+    <div class="card">
+      <div class="card-bar" style="background:var(--teal)"></div>
+      <div class="card-in" style="text-align:center">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px">100 Nutzer</div>
+        <div class="big-num" style="color:var(--teal)">15.000 €</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:1px;font-family:'Rajdhani';text-transform:uppercase">März – realistisch für dich</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:linear-gradient(90deg,var(--turbo),var(--gold))"></div>
+      <div class="card-in" style="text-align:center">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px">200+ Nutzer</div>
+        <div class="big-num" style="background:linear-gradient(135deg,var(--gold),var(--turbo2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">30.000 €+</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:1px;font-family:'Rajdhani';text-transform:uppercase">April – Prognose</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:var(--green)"></div>
+      <div class="card-in" style="text-align:center">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px">350+ Nutzer</div>
+        <div class="big-num" style="color:var(--green)">52.500 €+</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:1px;font-family:'Rajdhani';text-transform:uppercase">Weltmeisterschaft Prognose</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--dim);margin-top:16px;font-style:italic">Unser Top-Creator hat letzten Monat ~350.000 € verdient – bei weniger Reichweite als Junior.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CASE STUDIES -->
+<section id="cases">
+  <div class="section-tag">Referenzen</div>
+  <h2 class="section-title">Case Studies – <em>echte Zahlen</em></h2>
+  <p class="section-sub">Was bereits funktioniert hat – mit Creatorn ähnlich wie Junior.</p>
+  <div class="cards-2">
+    <div class="card">
+      <div class="card-bar" style="background:var(--teal)"></div>
+      <div class="card-in">
+        <div style="font-size:10px;color:var(--teal);letter-spacing:3px;text-transform:uppercase;font-family:'Rajdhani';margin-bottom:8px">Case Study #1</div>
+        <div class="card-h" style="font-size:18px">Influencer – Telegram + Discord</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px">März 2026 · 3 Wochen · ähnliches Profil</div>
+        <div style="display:flex;gap:24px;margin-bottom:14px">
+          <div>
+            <div class="big-num" style="color:var(--teal);font-size:40px">10.000</div>
+            <div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-family:'Rajdhani'">Telegram-Mitglieder</div>
+          </div>
+          <div>
+            <div class="big-num" style="font-size:40px">37.500 €</div>
+            <div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-family:'Rajdhani'">Verdienst</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);font-style:italic">250 Discord-Einzahlungen in nur 3 Wochen</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:var(--turbo)"></div>
+      <div class="card-in">
+        <div style="font-size:10px;color:var(--turbo);letter-spacing:3px;text-transform:uppercase;font-family:'Rajdhani';margin-bottom:8px">Case Study #2</div>
+        <div class="card-h" style="font-size:18px">oddify.ai</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px">März 2026 · laufend</div>
+        <div class="big-num" style="font-size:52px;margin-bottom:8px">25.000 €</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:8px">Nur in diesem Monat – und März ist noch nicht vorbei!</p>
+        <p style="font-size:13px;color:var(--turbo)">→ oddify.ai/de</p>
+      </div>
+    </div>
+  </div>
+  <div class="bonus-bar">
+    ✈️ &nbsp;<strong>Exklusiv-Bonus:</strong> Vor 2 Wochen haben wir 2 unserer Creator KOSTENLOS zum AC Milan vs. Inter Derby geschickt – Flug, Hotel, Begleitung, alles auf uns.<br><br>
+  🌍 &nbsp;<strong>BEI DER NÄCHSTEN REISE KANNST DU DABEI SEIN!</strong>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TELEGRAM OPTION -->
+<section id="telegram">
+  <div class="section-tag">Bonus Option</div>
+  <h2 class="section-title">Der <em>Telegram-Start</em> – Zero Risk</h2>
+  <p class="section-sub">Erstmal testen, dann skalieren. Du siehst selbst wie groß der Andrang ist.</p>
+  <div class="flow">
+    <div class="flow-box">
+      <div class="card-bar" style="background:var(--teal)"></div>
+      <div class="in" style="padding:22px">
+        <div class="card-h" style="color:var(--teal);margin-bottom:14px">📱 Telegram zuerst</div>
+        <div class="flow-item"><b>Niedrige Einstiegshürde</b> – einfach zu joinen</div>
+        <div class="flow-item">Junior <b>baut erste Bindung</b> mit Followern auf</div>
+        <div class="flow-item">Wir messen <b>Andrang &amp; Engagement</b></div>
+        <div class="flow-item">Du siehst selbst: <b>Wie viele kommen?</b></div>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="card-bar" style="background:var(--turbo)"></div>
+      <div class="in" style="padding:22px">
+        <div class="card-h" style="color:var(--turbo);margin-bottom:14px">💬 Discord danach</div>
+        <div class="flow-item"><b>Premium Community</b> mit echten Mitgliedern</div>
+        <div class="flow-item"><b>150 € pro</b> zahlender Einzahlung</div>
+        <div class="flow-item">Zugang zu <b>allen Channels</b> &amp; Tippern</div>
+        <div class="flow-item"><b>Volle Monetarisierung</b> deiner Reichweite</div>
+      </div>
+    </div>
+  </div>
+  <div class="flow-note">
+    <div class="card-h" style="color:var(--gold);margin-bottom:8px">💡 Warum das smart ist</div>
+    <p class="card-p">So kannst du <strong>selbst prüfen</strong> wie groß der Andrang ist – bevor du dich voll commitest. Unser Referenz-Creator hatte in 3 Wochen <strong>10.000 Telegram-Mitglieder</strong>. Null Risiko für Junior.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VORTEILE -->
+<section id="vorteile">
+  <div class="section-tag">Warum Ja sagen?</div>
+  <h2 class="section-title">Deine Vorteile <em>auf einen Blick</em></h2>
+  <div class="ben-grid">
+    <div class="ben"><div class="bi">🛡️</div><div class="bt">Keine Grauzone</div><div class="bd">Du bewirbst nur deinen Discord – nicht direkt einen Buchmacher. Rechtlich sauber.</div></div>
+    <div class="ben"><div class="bi">🎧</div><div class="bt">Null Stress</div><div class="bd">Kein direkter Kundenkontakt. Wir kümmern uns um alles – du machst nur Content.</div></div>
+    <div class="ben"><div class="bi">💸</div><div class="bt">Flexible Zahlung</div><div class="bd">Bar, Überweisung oder Krypto – sofort nach Bestätigung. Keine Wartezeiten.</div></div>
+    <div class="ben"><div class="bi">📈</div><div class="bt">Skalierbar</div><div class="bd">Je mehr Reichweite Junior aufbaut, desto mehr Verdienst. Linear planbar.</div></div>
+    <div class="ben"><div class="bi">✈️</div><div class="bt">Exklusive Perks</div><div class="bd">Top-Creator bekommen Events, Reisen &amp; Boni – komplett auf unsere Kosten.</div></div>
+    <div class="ben"><div class="bi">🤝</div><div class="bt">Echtes Team</div><div class="bd">Wir sind ein Team mit Junior – kein anonymer Anbieter, sondern echte Partnerschaft.</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<div id="cta-section">
+  <div class="inner">
+    <div class="personal-badge">Exklusiv für Junior</div>
+    <div class="cta-title">Junior,<br>let's <em>go</em>.</div>
+    <p class="cta-sub">Lass uns alles in einem kurzen Call klären – ohne Verpflichtung.</p>
+    <div style="display:flex;justify-content:center">
+      <a href="https://t.me/jouley" target="_blank" class="cta-big-btn">✈️ &nbsp; Jetzt auf Telegram schreiben</a>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <div class="cta-checks">
+        <div class="cta-check"><b>✓</b>Alles wird transparent im Call erklärt</div>
+        <div class="cta-check"><b>✓</b>Vertragsmodell &amp; Auszahlungen direkt besprechen</div>
+        <div class="cta-check"><b>✓</b>Start sofort möglich – noch diesen Monat verdienen</div>
+      </div>
+    </div>
+    <p class="cta-footer">Wett Elite &nbsp;·&nbsp; Erstellt exklusiv für Junior</p>
+  </div>
+</div>
+
+<footer>
+  © 2026 Wett Elite &nbsp;·&nbsp; Alle Rechte vorbehalten &nbsp;·&nbsp; Vertraulich
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+</script>
+</body>
+</html>
